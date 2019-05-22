@@ -35,10 +35,12 @@ def main():
 def get_files_from_sample(sample):
     fs = [] 
     if 'hist' in sample:
-        fs.append(ROOT.TFile('run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_1.root'))
+        # fs.append(ROOT.TFile('run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_1.root'))
+        fs.append(ROOT.TFile('run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_phi.root'))
 
     if 'hist_incl' in sample:
-        fs.append(ROOT.TFile('run/jpsi2incl/hist/jpsi2incl_data_psip_data12_event_merged_1.root'))
+        # fs.append(ROOT.TFile('run/jpsi2incl/hist/jpsi2incl_data_psip_data12_event_merged_1.root'))
+        fs.append(ROOT.TFile('run/jpsi2incl/hist/jpsi2incl_data_psip_data12_event_merged_phi.root'))
     
     if 'mc12' in sample:
 	    fs.append(ROOT.TFile('run/jpsi2invi/hist_mc12/jpsi2invi_psip_mc12_event_merged_1.root'))

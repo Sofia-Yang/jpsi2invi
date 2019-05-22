@@ -57,7 +57,7 @@ h_pip_costhe_mu = ROOT.TH1D('h_pip_costhe_mu', 'pip_costhe_mu', 100, -1.0, 1.0)
 h_pim_costhe_mu = ROOT.TH1D('h_pim_costhe_mu', 'pim_costhe_mu', 100, -1.0, 1.0)
 h_cospipi_mu = ROOT.TH1D('h_cospipi_mu', 'cospipi_mu', 200, -1.0, 1.0)
 h_cos2pisys_mu = ROOT.TH1D('h_cos2pisys_mu', 'cos2pisys_mu', 100, -1.0, 1.0)
-
+h_ngam_mu = ROOT.TH1D('h_ngam_mu', 'ngam_mu', 10, 0, 10)
 
 h_melel = ROOT.TH1D('h_melel', 'melel', 100, 2.5, 3.5) 
 h_elp_p = ROOT.TH1D('h_elp_p', 'elp_p', 100, 1.0, 2.0) 
@@ -145,6 +145,7 @@ def main():
 
             cut_invMass_el = (t.vtx_melel > 2.7 and t.vtx_melel < 3.2)
             cut_invMass_mu = (t.vtx_mmumu > 3.0 and t.vtx_mmumu < 3.2)
+            cut_invMass_mu_ngam = (t.vtx_mmumu > 3.08 and t.vtx_mmumu < 3.2)
 
             if (t.jpsi2elel_flag == 1 and (cut_el_eop_p or cut_el_eop_m or cut_el_eop_pm) and cut_invMass_el):
                 h_mrecpipi_el.Fill(t.vtx_mrecpipi)
@@ -165,7 +166,9 @@ def main():
                 h_mum_costhe.Fill(t.vtx_mum_costheta)
                 h_cosmumu.Fill(t.vtx_cosmumu)
 
-            
+            if (t.jpsi2mumu_flag == 1 and (cut_mu_eop_p and cut_mu_eop_m) and cut_invMass_mu):
+                h_ngam_mu.Fill(t.ngam)
+
     fout = ROOT.TFile(outfile, "RECREATE")
     write_histograms() 
     fout.Close()
@@ -278,6 +281,7 @@ def write_histograms():
     h_pim_costhe_mu.Write()
     h_cospipi_mu.Write()
     h_cos2pisys_mu.Write()
+    h_ngam_mu.Write()
 
     h_melel.Write()
     h_elp_p.Write() 

@@ -15,6 +15,7 @@ usage() {
     printf "\n\t%-5s  %-40s\n"  "3"  "build Jpsi2pnpi analyzer"
     printf "\n\t%-5s  %-40s\n"  "4"  "build Jpsi2lplm analyzer"
     printf "\n\t%-5s  %-40s\n"  "5"  "build Jpsi2geta analyzer"
+    printf "\n\t%-5s  %-40s\n"  "6"  "build Mumu analyzer"
     printf "\n\n" 
 }
 
@@ -48,5 +49,11 @@ case $option in
        cd Analysis/Physics/PsiPrime/Jpsi2geta/Jpsi2geta-00-00-01/cmt
        gmake
        ;;
+    6) echo "Building Mumu module..."
+       cd Analysis/Physics/PsiPrime/Mumu/Mumu-00-00-01/cmt
+       gmake
+       ;;
+
+
 esac
 

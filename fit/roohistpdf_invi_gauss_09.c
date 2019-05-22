@@ -38,10 +38,15 @@ void roohistpdf_invi_gauss_09()
 //	c->Divide(3);
 
     // 2009 data set
-   signal_pdf_rootfile =   "../run/jpsi2lplm/hist_data09/jpsi2lplm_data_psip_data09_event_merged_fit.root" ;
-   jpsi2incl_rootfile =    "../run/jpsi2incl/hist_data09/jpsi2incl_data_psip_data09_event_merged_fit.root" ;
+   signal_pdf_rootfile =   "../run/jpsi2lplm/hist_data09/jpsi2lplm_data_psip_data09_event_merged_notof.root" ;
+   jpsi2incl_rootfile =    "../run/jpsi2incl/hist_data09/jpsi2incl_data_psip_data09_event_merged_notof.root" ;
+   jpsi2invi_rootfile =    "../run/jpsi2invi/hist_data09/jpsi2invi_data_psip_data09_event_merged_notof.root" ;
+  // jpsi2invi_rootfile =    "../run/jpsi2invi/hist_mc09/jpsi2invi_psip_mc09_event_merged_notof.root";
   //  jpsi2invi_rootfile =    "../run/jpsi2invi/hist_data09/jpsi2invi_data_psip_data09_event_merged_fit.root" ;
-   jpsi2invi_rootfile =    "../run/jpsi2invi/hist_data09/jpsi2invi_data_psip_data09_event_merged_ncharged.root" ;
+  
+  //  signal_pdf_rootfile =   "../run/jpsi2lplm/hist_data09/jpsi2lplm_data_psip_data09_event_merged_fit.root" ;
+  //  jpsi2incl_rootfile =    "../run/jpsi2incl/hist_data09/jpsi2incl_data_psip_data09_event_merged_fit.root" ;
+  // jpsi2invi_rootfile =    "../run/jpsi2invi/hist_data09/jpsi2invi_data_psip_data09_event_merged_ncharged.root" ;
   
    // 2012 data set
   //  signal_pdf_rootfile =   "../run/jpsi2lplm/hist/jpsi2lplm_data_psip_data12_event_merged_1.root" ;
@@ -113,8 +118,11 @@ void roohistpdf_invi_gauss_09()
 
     // 2nd order polynomial function 
     RooRealVar c0("c0","coefficient #0", 0.3, -0.1, 0.5); 
-    RooRealVar c1("c1","coefficient #1", 0.07, -0.1, 0.2); 
-    RooChebychev bkg("bkg","background p.d.f.", x, RooArgList(c0,c1)); 
+    
+   RooRealVar c1("c1","coefficient #1", 0.07, -0.1, 0.2); 
+   RooChebychev bkg("bkg","background p.d.f.", x, RooArgList(c0,c1)); 
+
+    // RooChebychev bkg("bkg","background p.d.f.", x, RooArgList(c0)); 
     
     // 3rd order polynomial function
   //  RooRealVar c2("c2","coefficient #2",0.0005,-0.1,0.1) ; 
@@ -161,7 +169,7 @@ void roohistpdf_invi_gauss_09()
        //data_tree.plotOn(xframe, Binning(120)); 
        model.plotOn(xframe); 
        model.plotOn(xframe, Components(bkg), LineStyle(kDashed), LineColor(kGreen)); 
-       model.plotOn(xframe, Components(signalpdf), LineStyle(kDotted)); 
+       //model.plotOn(xframe, Components(signalpdf), LineStyle(kDotted)); 
       //  signalpdf.plotOn(xframe, Components(sig), LineStyle(kDotted), LineColor(kRed)); 
       //  signalpdf.plotOn(xframe, Components(sig1), LineStyle(kDotted), LineColor(kOrange+2));	     
        xframe->Draw("e"); 

@@ -36,46 +36,67 @@ def error_add(A, a, B, b):
 # for data 2009
 if logdir in [['09']]:
     inv_down, e_inv_down = error_mul(40.60, 0.07, 0.994, 0.001)
-    inv, e_inv = error_div(-4475, 2791, inv_down, e_inv_down)
+    inv, e_inv = error_div(-4098.0, 2667.0, inv_down, e_inv_down)
     print "invi = %.2f +- %.2f" %(inv, e_inv)
-    mumu, e_mumu = error_div(713652, 3497, 32.36, 0.03)
+    mumu, e_mumu = error_div(713652.0, 3497.0, 32.36, 0.03)
     print "mumu = %.2f +- %.2f" %(mumu, e_mumu)
+    stat_invi = -4098.0 / 40.60 / 0.994
+    stat_invi_err = 384.0 / 40.60 / 0.994
+    stat_mumu = 713652.0 / 32.36
+    stat_mumu_err = 693.0 / 32.36
+    stat, stat_err = error_div(stat_invi, stat_invi_err, stat_mumu, stat_mumu_err)
 
     E, e = error_div(inv, e_inv, mumu, e_mumu)
-    # print "%f =? %f" %(E*10000, stat*10000)
-    print "B/B = (%f +- %f)*10^-4" %(E*10000,  e*10000)
 
 
 # for data 2012
 elif logdir in [['12']]:
+
     inv_down, e_inv_down = error_mul(39.25, 0.07, 0.998, 0.0004)
-    c = 443620.0+13779.0*0.998
-    f = 396471.0*0.0047
-    aaa, bbb = error_sub(396471.0, f, c, 9725.0)
-    # c = 411966.0+13779.0*0.998
-    # f = 368711.0*0.0047
-    # aaa, bbb = error_sub(368711.0, f, c, 9725.0)
-    print "N_invi = %.2f +- %.2f" %(aaa, bbb)
-    inv, e_inv = error_div(aaa, bbb, inv_down, e_inv_down)
+    inv, e_inv = error_div(-70776.0, 9233.0, inv_down, e_inv_down)
     print "invi = %.2f +- %.2f" %(inv, e_inv)
-    g = 2224671.0*0.0049
-    print "N_mumu = %.2f +- %.2f" %(2224671.0, g)
-    mumu, e_mumu = error_div(2224671.0, g, 31.44, 0.03) 
+    mumu, e_mumu = error_div(2224671.0, 10901.0, 31.44, 0.03)
     print "mumu = %.2f +- %.2f" %(mumu, e_mumu)
+    stat_invi = -70776.0 / 39.25 / 0.998
+    stat_invi_err = 384.0 / 40.60 / 0.994
+    stat_mumu = 2224671.0 / 31.44
+    stat_mumu_err = 1275.0 / 31.44
+    stat, stat_err = error_div(stat_invi, stat_invi_err, stat_mumu, stat_mumu_err)
 
     E, e = error_div(inv, e_inv, mumu, e_mumu)
-    invi_1 = aaa/0.998/39.25
-    invi_2 = 683.0/0.998/39.25
-    mumu_1 = 2224671.0/31.44
-    mumu_2 = 1275.0/31.44
-    stat, stat_err = error_div(invi_1, invi_2, mumu_1, mumu_2)
 
-    print "%f =? %f" %(E*10000, stat*10000)
-    print "B/B = (%f +- %f +- %f)*10^-4" %(E*10000, stat_err*10000,  e*10000)
+
+
+    # inv_down, e_inv_down = error_mul(39.25, 0.07, 0.998, 0.0004)
+    # c = 443620.0+13779.0*0.998
+    # f = 396471.0*0.0047
+    # aaa, bbb = error_sub(396471.0, f, c, 9725.0)
+    # # c = 411966.0+13779.0*0.998
+    # # f = 368711.0*0.0047
+    # # aaa, bbb = error_sub(368711.0, f, c, 9725.0)
+    # print "N_invi = %.2f +- %.2f" %(aaa, bbb)
+    # inv, e_inv = error_div(aaa, bbb, inv_down, e_inv_down)
+    # print "invi = %.2f +- %.2f" %(inv, e_inv)
+    # g = 2224671.0*0.0049
+    # print "N_mumu = %.2f +- %.2f" %(2224671.0, g)
+    # mumu, e_mumu = error_div(2224671.0, g, 31.44, 0.03) 
+    # print "mumu = %.2f +- %.2f" %(mumu, e_mumu)
+
+    # E, e = error_div(inv, e_inv, mumu, e_mumu)
+    # invi_1 = aaa/0.998/39.25
+    # invi_2 = 683.0/0.998/39.25
+    # mumu_1 = 2224671.0/31.44
+    # mumu_2 = 1275.0/31.44
+    # stat, stat_err = error_div(invi_1, invi_2, mumu_1, mumu_2)
 
 
 else:
     print 'input error'
+
+print "%f =? %f" %(E*10000, stat*10000)
+print "B/B = (%f +- %f +- %f)*10^-4" %(E*10000, stat_err*10000,  e*10000)
+
+
 
 
 

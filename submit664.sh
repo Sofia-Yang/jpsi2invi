@@ -744,7 +744,6 @@ case $option in
 		find . -name "*.err.*" | xargs rm	   
 	    rm ../../event/jpsi2lplm_psip_mc12_event-*
 		hep_sub -g physics -n 394 jobOptions_jpsi2lplm_psip_mc12_event-%{ProcId}.sh
-	    cd 
 	    ;;
 
      1.4.9) echo "Check Condor jobs on events psip(2S) MC sample for lplm..."
@@ -804,6 +803,7 @@ case $option in
 	   ./python/chk_condorjobs.py run/gen_mc/jpsi2ee/job_text/rootfile_ee  3
 	   ./python/chk_condorjobs.py run/gen_mc/jpsi2nn/job_text/rootfile_nn  1
 	   ./python/chk_condorjobs.py run/gen_mc/jpsi2pp/job_text/rootfile_pp  2
+	   ./python/chk_condorjobs.py run/gen_mc/jpsi2nunu/job_text/rootfile_nunu  1
 	   ;;
 
     1.5.7) echo "Test for generated MC sample event" 
@@ -828,6 +828,10 @@ case $option in
         find . -name "*.sh.*" | xargs rm
         rm ../event_pp/invi/jpsi2invi_gen_mc_pp_event-*
 	    hep_sub -g physics -n 2 jobOptions_jpsi2invi_gen_mc_pp_event-%{ProcId}.sh
+        cd ../../../jpsi2nunu/job_text/jobs
+        find . -name "*.sh.*" | xargs rm
+        rm ../event_nunu/invi/jpsi2invi_gen_mc_nunu_event-*
+	    hep_sub -g physics jobOptions_jpsi2invi_gen_mc_nunu_event-1.sh
 	   ;;
 
     1.5.10) echo  "Merge event root file on generated MC sample..."
@@ -835,22 +839,21 @@ case $option in
         rm run/gen_mc/jpsi2ee/job_text/hist/jpsi2invi_gen_mc_ee_event_merged_1.root
         rm run/gen_mc/jpsi2nn/job_text/hist/jpsi2invi_gen_mc_nn_event_merged_1.root
         rm run/gen_mc/jpsi2pp/job_text/hist/jpsi2invi_gen_mc_pp_event_merged_1.root
+        rm run/gen_mc/jpsi2nunu/job_text/hist/jpsi2invi_gen_mc_nunu_event_merged_1.root
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2mumu/job_text/event_mumu/invi run/gen_mc/jpsi2mumu/job_text/hist
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2ee/job_text/event_ee/invi run/gen_mc/jpsi2ee/job_text/hist
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2nn/job_text/event_nn/invi run/gen_mc/jpsi2nn/job_text/hist
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2pp/job_text/event_pp/invi run/gen_mc/jpsi2pp/job_text/hist
        cd run/gen_mc/jpsi2mumu/job_text/hist
-       mv jpsi2invi_gen_mc_mumu_event_merged_1.root jpsi2invi_gen_mc_mumu_event_merged_08.root
+       mv jpsi2invi_gen_mc_mumu_event_merged_1.root jpsi2invi_gen_mc_mumu_event_merged_phi.root
        cd ../../../jpsi2ee/job_text/hist
-       mv jpsi2invi_gen_mc_ee_event_merged_1.root jpsi2invi_gen_mc_ee_event_merged_08.root
+       mv jpsi2invi_gen_mc_ee_event_merged_1.root jpsi2invi_gen_mc_ee_event_merged_phi.root
        cd ../../../jpsi2nn/job_text/hist
-       mv jpsi2invi_gen_mc_nn_event_merged_1.root jpsi2invi_gen_mc_nn_event_merged_08.root
+       mv jpsi2invi_gen_mc_nn_event_merged_1.root jpsi2invi_gen_mc_nn_event_merged_phi.root
        cd ../../../jpsi2pp/job_text/hist
-       mv jpsi2invi_gen_mc_pp_event_merged_1.root jpsi2invi_gen_mc_pp_event_merged_08.root
-
-
-
-
+       mv jpsi2invi_gen_mc_pp_event_merged_1.root jpsi2invi_gen_mc_pp_event_merged_phi.root
+       cd ../../../jpsi2nunu/job_text/hist
+       mv ../event_nunu/jpsi2invi_gen_mc_nunu_event-1.root jpsi2invi_gen_mc_nunu_event_merged_phi.root
        ;;
 
     1.6) echo "Running on generated MC sample for incl..."
@@ -887,6 +890,10 @@ case $option in
         find . -name "*.txt.*" | xargs rm	   
         rm ../rootfile_pp/gen_mc_pp_jpsi2incl-*
 	    boss.condor -g physics -n 2 jobOptions_jpsi2incl_gen_mc_pp-%{ProcId}.txt
+        cd ../../../jpsi2nunu/job_text/jobs
+        find . -name "*.txt.*" | xargs rm	   
+        rm ../rootfile_nunu/gen_mc_nunu_jpsi2incl-*
+	    boss.condor -g physics jobOptions_jpsi2incl_gen_mc_nunu-1.txt
 	   ;;
 
     1.6.5) echo "Check Condor jobs on generated MC sample for incl..."
@@ -894,6 +901,7 @@ case $option in
 	   ./python/chk_condorjobs.py run/gen_mc/jpsi2ee/job_text/rootfile_ee  3
 	   ./python/chk_condorjobs.py run/gen_mc/jpsi2nn/job_text/rootfile_nn  1
 	   ./python/chk_condorjobs.py run/gen_mc/jpsi2pp/job_text/rootfile_pp  2
+	   ./python/chk_condorjobs.py run/gen_mc/jpsi2nunu/job_text/rootfile_nunu  1
 	   ;;
 
     1.6.7) echo "Test for generated MC sample event for incl" 
@@ -917,6 +925,10 @@ case $option in
         find . -name "*.sh.*" | xargs rm
         rm ../event_pp/incl/jpsi2incl_gen_mc_pp_event-*
 	    hep_sub -g physics -n 2 jobOptions_jpsi2incl_gen_mc_pp_event-%{ProcId}.sh
+        cd ../../../jpsi2nunu/job_text/jobs
+        find . -name "*.sh.*" | xargs rm
+        rm ../event_nunu/incl/jpsi2incl_gen_mc_nunu_event-*
+	    hep_sub -g physics jobOptions_jpsi2incl_gen_mc_nunu_event-1.sh
 	   ;;
 
     1.6.10) echo  "Merge event root file on generated MC sample for incl..."
@@ -924,11 +936,93 @@ case $option in
        rm run/gen_mc/jpsi2ee/job_text/hist/jpsi2incl_gen_mc_ee_event_merged_1.root
        rm run/gen_mc/jpsi2nn/job_text/hist/jpsi2incl_gen_mc_nn_event_merged_1.root
        rm run/gen_mc/jpsi2pp/job_text/hist/jpsi2incl_gen_mc_pp_event_merged_1.root
+       rm run/gen_mc/jpsi2nunu/job_text/hist/jpsi2incl_gen_mc_nunu_event_merged_1.root
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2mumu/job_text/event_mumu/incl run/gen_mc/jpsi2mumu/job_text/hist
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2ee/job_text/event_ee/incl run/gen_mc/jpsi2ee/job_text/hist
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2nn/job_text/event_nn/incl run/gen_mc/jpsi2nn/job_text/hist
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2pp/job_text/event_pp/incl run/gen_mc/jpsi2pp/job_text/hist
-	   ;;
+       cd run/gen_mc/jpsi2mumu/job_text/hist
+       mv jpsi2incl_gen_mc_mumu_event_merged_1.root jpsi2incl_gen_mc_mumu_event_merged_phi.root
+       cd ../../../jpsi2ee/job_text/hist
+       mv jpsi2incl_gen_mc_ee_event_merged_1.root jpsi2incl_gen_mc_ee_event_merged_phi.root
+       cd ../../../jpsi2nn/job_text/hist
+       mv jpsi2incl_gen_mc_nn_event_merged_1.root jpsi2incl_gen_mc_nn_event_merged_phi.root
+       cd ../../../jpsi2pp/job_text/hist
+       mv jpsi2incl_gen_mc_pp_event_merged_1.root jpsi2incl_gen_mc_pp_event_merged_phi.root
+       cd ../../../jpsi2nunu/job_text/hist
+       mv ../event_nunu/jpsi2incl_gen_mc_nunu_event-1.root jpsi2incl_gen_mc_nunu_event_merged_phi.root
+       ;;
+
+    # 1.7) echo "Running on psip(2S) MC sample for jpsi2mumu..."
+	#  ;;
+
+    # 1.7.2) echo "Generate Condor jobs on psip(2S) MC sample for mumu..." 
+	#    cd run/jpsi2mumu/gen_script
+    #    rm ../job_text/mc12/jobOptions_jpsi2mumu_psip_mc12-*
+	#    ./make_jobOption_file_mc12_jpsi2mumu.sh
+	#    cd ../job_text/mc12
+	#    mv jobOptions_jpsi2mumu_psip_mc12-394.txt jobOptions_jpsi2mumu_psip_mc12-0.txt
+	#    ;;
+
+    # 1.7.3) echo "test for psip(2S) MC sample for mumu" 
+    #     echo "have you changed test number?(yes / no)
+    #     ./run/jpsi2mumu/job_text/mc12/jobOptions_jpsi2mumu_psip_mc12-0.txt"
+    #     read opt
+    #     if [ $opt == "yes" ]
+    #         then
+    #         echo "now in yes"  
+    #         cd run/jpsi2mumu/job_text/mc12
+    #         boss.exe jobOptions_jpsi2mumu_psip_mc12-0.txt
+    #     else
+    #         echo "Default value is 'no', please change test number."
+    #     fi
+    #     ;;
+
+    # 1.7.4) echo "Submit Condor jobs on psip(2S) MC sample for mumu ---- 2..." 
+	#     cd run/jpsi2mumu/job_text/mc12
+    #     find . -name "*.out.*" | xargs rm
+    #     find . -name "*.err.*" | xargs rm	  
+	#    rm ../../rootfile_mc12/jpsi2mumu_psip_mc12-*	
+	#    boss.condor -g physics -n 394 jobOptions_jpsi2mumu_psip_mc12-%{ProcId}.txt
+	#    ;;
+
+    # 1.7.5) echo "Check Condor jobs on psip(2S) MC sample for mumu..."
+	#    ./python/chk_condorjobs.py run/jpsi2mumu/rootfile_mc12  394
+	#    ;;
+    
+    # 1.7.6) echo "Generate selection Condor jobs on psip(2S) MC sample for mumu..."
+	#    cd run/jpsi2mumu/gen_script
+    #    rm ../job_text/mc12_event/jobOptions_jpsi2mumu_psip_mc12_event-*
+	#    ./make_jobOption_file_mc12_event.sh
+	#    cd ../job_text/mc12_event
+	#    mv jobOptions_jpsi2mumu_psip_mc12_event-394.sh jobOptions_jpsi2mumu_psip_mc12_event-0.sh
+    #    chmod 755 jobOptions_jpsi2mumu_psip_mc12_event-*
+	#    ;;
+
+    # 1.7.7) echo "Test for psip(2S) MC sample event for mumu" 
+	# 	cd run/jpsi2mumu/job_text/mc12_event
+	# 	./jobOptions_jpsi2mumu_psip_mc12_event-0.sh
+    #     ;;
+
+    # 1.7.8) echo "Submit selection Condor jobs on psip(2S) MC sample for mumu ---- 2..." 
+	#     cd run/jpsi2mumu/job_text/mc12_event
+    #     find . -name "*.out.*" | xargs rm
+    #     find . -name "*.err.*" | xargs rm	   	   
+    #     rm ../../event_mc12/jpsi2mumu_psip_mc12_event-*
+	#    hep_sub -g physics -n 394 jobOptions_jpsi2mumu_psip_mc12_event-%{ProcId}.sh
+	#    ;;
+
+    # 1.7.9) echo "Check Condor jobs on events psip(2S) MC sample for mumu..."
+	#    ./python/chk_condorjobs.py run/jpsi2mumu/event_mc12  394
+	#    ;;
+
+    # 1.7.10) echo  "Merge event root file on psip(2S) MC sample for mumu..."
+	#    mkdir run/jpsi2mumu/hist_mc12
+    #    rm run/jpsi2mumu/hist_mc12/jpsi2mumu_psip_mc12_event_merged_1.root
+	#    ./python/mrg_rootfiles.py  run/jpsi2mumu/event_mc12 run/jpsi2mumu/hist_mc12
+	#    ;; 
+
+
 
     3.1) echo "Running on data09 sample..."
 	 ;;
@@ -1212,10 +1306,10 @@ case $option in
         find . -name "*.sh.*" | xargs rm
         rm ../event_pp_09/invi/jpsi2invi_gen_mc_pp_09_event-*
 	    hep_sub -g physics -n 7 jobOptions_jpsi2invi_gen_mc_pp_09_event-%{ProcId}.sh
-        # cd ../../../jpsi2nunu_09/job_text/jobs
-        # find . -name "*.sh.*" | xargs rm
-        # rm ../event_nunu_09/invi/jpsi2invi_gen_mc_nunu_09_event-*
-	    # hep_sub -g physics -n 4 jobOptions_jpsi2invi_gen_mc_nunu_09_event-%{ProcId}.sh
+        cd ../../../jpsi2nunu_09/job_text/jobs
+        find . -name "*.sh.*" | xargs rm
+        rm ../event_nunu_09/invi/jpsi2invi_gen_mc_nunu_09_event-*
+	    hep_sub -g physics -n 4 jobOptions_jpsi2invi_gen_mc_nunu_09_event-%{ProcId}.sh
 	   ;;
 
     3.5.9) echo "Check Condor event jobs on generated MC 09 sample..."
@@ -1223,7 +1317,7 @@ case $option in
 	   ./python/chk_condorjobs.py run/gen_mc/jpsi2ee_09/job_text/event_ee_09  10
 	   ./python/chk_condorjobs.py run/gen_mc/jpsi2nn_09/job_text/event_nn_09  4
 	   ./python/chk_condorjobs.py run/gen_mc/jpsi2pp_09/job_text/event_pp_09  7
-	#    ./python/chk_condorjobs.py run/gen_mc/jpsi2nunu_09/job_text/event_nunu_09  4
+	   ./python/chk_condorjobs.py run/gen_mc/jpsi2nunu_09/job_text/event_nunu_09  4
 	   ;;       
 
     3.5.10) echo  "Merge event root file on generated MC 09 sample..."
@@ -1231,24 +1325,49 @@ case $option in
         rm run/gen_mc/jpsi2ee_09/job_text/hist/jpsi2invi_gen_mc_ee_09_event_merged_1.root
         rm run/gen_mc/jpsi2nn_09/job_text/hist/jpsi2invi_gen_mc_nn_09_event_merged_1.root
         rm run/gen_mc/jpsi2pp_09/job_text/hist/jpsi2invi_gen_mc_pp_09_event_merged_1.root
-        # rm run/gen_mc/jpsi2nunu_09/job_text/hist/jpsi2invi_gen_mc_nunu_09_event_merged_1.root
+        rm run/gen_mc/jpsi2nunu_09/job_text/hist/jpsi2invi_gen_mc_nunu_09_event_merged_1.root
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2mumu_09/job_text/event_mumu_09/invi run/gen_mc/jpsi2mumu_09/job_text/hist
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2ee_09/job_text/event_ee_09/invi run/gen_mc/jpsi2ee_09/job_text/hist
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2nn_09/job_text/event_nn_09/invi run/gen_mc/jpsi2nn_09/job_text/hist
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2pp_09/job_text/event_pp_09/invi run/gen_mc/jpsi2pp_09/job_text/hist
-	#    ./python/mrg_rootfiles.py  run/gen_mc/jpsi2nunu_09/job_text/event_nunu_09/invi run/gen_mc/jpsi2nunu_09/job_text/hist
+	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2nunu_09/job_text/event_nunu_09/invi run/gen_mc/jpsi2nunu_09/job_text/hist
        cd run/gen_mc/jpsi2mumu_09/job_text/hist
-       mv jpsi2invi_gen_mc_mumu_09_event_merged_1.root jpsi2invi_gen_mc_mumu_09_event_merged_08.root
+       mv jpsi2invi_gen_mc_mumu_09_event_merged_1.root jpsi2invi_gen_mc_mumu_09_event_merged_phi.root
        cd ../../../jpsi2ee_09/job_text/hist
-       mv jpsi2invi_gen_mc_ee_09_event_merged_1.root jpsi2invi_gen_mc_ee_09_event_merged_08.root
+       mv jpsi2invi_gen_mc_ee_09_event_merged_1.root jpsi2invi_gen_mc_ee_09_event_merged_phi.root
        cd ../../../jpsi2nn_09/job_text/hist
-       mv jpsi2invi_gen_mc_nn_09_event_merged_1.root jpsi2invi_gen_mc_nn_09_event_merged_08.root
+       mv jpsi2invi_gen_mc_nn_09_event_merged_1.root jpsi2invi_gen_mc_nn_09_event_merged_phi.root
        cd ../../../jpsi2pp_09/job_text/hist
-       mv jpsi2invi_gen_mc_pp_09_event_merged_1.root jpsi2invi_gen_mc_pp_09_event_merged_08.root
+       mv jpsi2invi_gen_mc_pp_09_event_merged_1.root jpsi2invi_gen_mc_pp_09_event_merged_phi.root
+       cd ../../../jpsi2nunu_09/job_text/hist
+       mv jpsi2invi_gen_mc_nunu_09_event_merged_1.root jpsi2invi_gen_mc_nunu_09_event_merged_phi.root
        ;;
 
     3.6) echo "Running on generated MC 09 sample for incl..."
 	 ;;
+
+    3.6.4) echo "Submit Condor jobs on generated MC 09 sample ---- 2..." 
+	    cd run/gen_mc/jpsi2mumu_09/job_text/jobs
+        find . -name "*.txt.*" | xargs rm	   
+        rm ../rootfile_mumu_09/gen_mc_mumu_09_jpsi2incl-*
+	    boss.condor -g physics -n 10 jobOptions_jpsi2incl_gen_mc_mumu_09-%{ProcId}.txt
+        cd ../../../jpsi2ee_09/job_text/jobs
+        find . -name "*.txt.*" | xargs rm	   
+        rm ../rootfile_ee_09/gen_mc_ee_09_jpsi2incl-*
+	    boss.condor -g physics -n 10 jobOptions_jpsi2incl_gen_mc_ee_09-%{ProcId}.txt
+        cd ../../../jpsi2nn_09/job_text/jobs
+        find . -name "*.txt.*" | xargs rm	   
+        rm ../rootfile_nn_09/gen_mc_nn_09_jpsi2incl-*
+	    boss.condor -g physics -n 4 jobOptions_jpsi2incl_gen_mc_nn_09-%{ProcId}.txt
+        cd ../../../jpsi2pp_09/job_text/jobs
+        find . -name "*.txt.*" | xargs rm	   
+        rm ../rootfile_pp_09/gen_mc_pp_09_jpsi2incl-*
+	    boss.condor -g physics -n 7 jobOptions_jpsi2incl_gen_mc_pp_09-%{ProcId}.txt
+        cd ../../../jpsi2nunu_09/job_text/jobs
+        rm ../rootfile_nunu_09/gen_mc_nunu_09_jpsi2incl-*
+        boss.condor -g physics -n 4 jobOptions_jpsi2incl_gen_mc_nunu_09-%{ProcId}.txt
+	   ;;
+
 
     3.6.8) echo "Submit selection Condor jobs on generated MC 09 sample ---- 2..." 
 	    cd run/gen_mc/jpsi2mumu_09/job_text/jobs
@@ -1267,6 +1386,10 @@ case $option in
         find . -name "*.sh.*" | xargs rm
         rm ../event_pp_09/incl/jpsi2incl_gen_mc_pp_09_event-*
 	    hep_sub -g physics -n 7 jobOptions_jpsi2incl_gen_mc_pp_09_event-%{ProcId}.sh
+        cd ../../../jpsi2nunu_09/job_text/jobs
+        find . -name "*.sh.*" | xargs rm
+        rm ../event_nunu_09/incl/jpsi2incl_gen_mc_nunu_09_event-*
+	    hep_sub -g physics -n 4 jobOptions_jpsi2incl_gen_mc_nunu_09_event-%{ProcId}.sh
 	   ;;
 
     3.6.9) echo "Check Condor event jobs on generated MC 09 sample..."
@@ -1274,13 +1397,31 @@ case $option in
 	   ./python/chk_condorjobs.py run/gen_mc/jpsi2ee_09/job_text/event_ee_09/incl  10
 	   ./python/chk_condorjobs.py run/gen_mc/jpsi2nn_09/job_text/event_nn_09/incl  4
 	   ./python/chk_condorjobs.py run/gen_mc/jpsi2pp_09/job_text/event_pp_09/incl  7
+	   ./python/chk_condorjobs.py run/gen_mc/jpsi2nunu_09/job_text/event_nunu_09/incl  4
 	   ;;     
 
     3.6.10) echo  "Merge event root file on generated MC 09 sample..."
-	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2mumu_09/job_text/event_mumu_09/incl run/gen_mc/jpsi2mumu_09/job_text/hist
+	    rm run/gen_mc/jpsi2mumu_09/job_text/hist/jpsi2incl_gen_mc_mumu_09_event_merged_1.root
+        rm run/gen_mc/jpsi2ee_09/job_text/hist/jpsi2incl_gen_mc_ee_09_event_merged_1.root
+        rm run/gen_mc/jpsi2nn_09/job_text/hist/jpsi2incl_gen_mc_nn_09_event_merged_1.root
+        rm run/gen_mc/jpsi2pp_09/job_text/hist/jpsi2incl_gen_mc_pp_09_event_merged_1.root
+        rm run/gen_mc/jpsi2nunu_09/job_text/hist/jpsi2incl_gen_mc_nunu_09_event_merged_1.root
+       ./python/mrg_rootfiles.py  run/gen_mc/jpsi2mumu_09/job_text/event_mumu_09/incl run/gen_mc/jpsi2mumu_09/job_text/hist
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2ee_09/job_text/event_ee_09/incl run/gen_mc/jpsi2ee_09/job_text/hist
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2nn_09/job_text/event_nn_09/incl run/gen_mc/jpsi2nn_09/job_text/hist
 	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2pp_09/job_text/event_pp_09/incl run/gen_mc/jpsi2pp_09/job_text/hist
+	   ./python/mrg_rootfiles.py  run/gen_mc/jpsi2nunu_09/job_text/event_nunu_09/incl run/gen_mc/jpsi2nunu_09/job_text/hist
+       cd run/gen_mc/jpsi2mumu_09/job_text/hist
+       mv jpsi2incl_gen_mc_mumu_09_event_merged_1.root jpsi2incl_gen_mc_mumu_09_event_merged_phi.root
+       cd ../../../jpsi2ee_09/job_text/hist
+       mv jpsi2incl_gen_mc_ee_09_event_merged_1.root jpsi2incl_gen_mc_ee_09_event_merged_phi.root
+       cd ../../../jpsi2nn_09/job_text/hist
+       mv jpsi2incl_gen_mc_nn_09_event_merged_1.root jpsi2incl_gen_mc_nn_09_event_merged_phi.root
+       cd ../../../jpsi2pp_09/job_text/hist
+       mv jpsi2incl_gen_mc_pp_09_event_merged_1.root jpsi2incl_gen_mc_pp_09_event_merged_phi.root
+       cd ../../../jpsi2nunu_09/job_text/hist
+       mv jpsi2incl_gen_mc_nunu_09_event_merged_1.root jpsi2incl_gen_mc_nunu_09_event_merged_phi.root
+
         ;;
 
     4.1) echo "Running on psip(2S) MC09..."
@@ -1431,6 +1572,105 @@ case $option in
 	   ./python/mrg_rootfiles.py  run/jpsi2incl/event_mc09 run/jpsi2incl/hist_mc09
 	   ;; 
 
+    4.4) echo "Running on psip(2S) MC09 for jpsi2lplm..."
+	 ;;
+	
+     4.4.2) echo "Generate Condor jobs on psip(2S) MC09 for lplm ---- 1 ..." 
+	   mkdir -p run/jpsi2lplm/job_text/mc09
+	   cd run/jpsi2lplm/gen_script
+	   ./make_jobOption_file_mc09_jpsi2lplm.sh
+	   cd ../job_text/mc09
+	   mv jobOptions_jpsi2lplm_psip_mc09-106.txt jobOptions_jpsi2lplm_psip_mc09-0.txt
+	   ;;
+
+    4.4.3) echo "test for psip(2S) MC09 for lplm" 
+        echo "have you changed test number?(yes / no)
+        ./run/jpsi2lplm/job_text/mc09/jobOptions_jpsi2lplm_psip_mc09-0.txt"
+        read opt
+        if [ $opt == "yes" ]
+            then
+            echo "now in yes"  
+            cd run/jpsi2lplm/job_text/mc09
+            boss.exe jobOptions_jpsi2lplm_psip_mc09-0.txt
+        else
+            echo "Default value is 'no', please change test number."
+        fi
+        ;;
+
+    4.4.4) echo "Submit Condor jobs on psip(2S) MC09 for lplm ---- 2..." 
+	    cd run/jpsi2lplm/job_text/mc09
+        find . -name "*.out.*" | xargs rm
+        find . -name "*.err.*" | xargs rm	   
+	    boss.condor -g physics -n 106 jobOptions_jpsi2lplm_psip_mc09-%{ProcId}.txt
+	    ;;
+
+     4.4.5) echo "Check Condor jobs on psip(2S) MC09 for lplm..."
+	   ./python/chk_condorjobs.py run/jpsi2lplm/rootfile_mc09  106
+	   ;;
+    
+     4.4.6) echo "Submit selection Condor jobs on psip(2S) MC09 for lplm..."
+	   mkdir run/jpsi2lplm/job_text/mc09_event
+	   cd run/jpsi2lplm/gen_script
+       rm ../job_text/mc09_event/jobOptions_jpsi2lplm_psip_mc09_event-*
+	   ./make_jobOption_file_mc09_event.sh
+	   cd ../job_text/mc09_event
+	   mv jobOptions_jpsi2lplm_psip_mc09_event-106.sh jobOptions_jpsi2lplm_psip_mc09_event-0.sh
+       chmod 755 jobOptions_jpsi2lplm_psip_mc09_event-*
+	   ;;
+
+ 	4.4.7) echo "Test for psip(2S) MC09 event for lplm" 
+		cd run/jpsi2lplm/job_text/mc09_event
+		./jobOptions_jpsi2lplm_psip_mc09_event-0.sh
+		;;
+
+	4.4.8) echo "Submit selection Condor jobs on psip(2S) MC09 for lplm ---- 2..." 
+		cd run/jpsi2lplm/job_text/mc09_event
+		find . -name "*.out.*" | xargs rm
+		find . -name "*.err.*" | xargs rm	   
+	    rm ../../event_mc09/jpsi2lplm_psip_mc09_event-*
+		hep_sub -g physics -n 106 jobOptions_jpsi2lplm_psip_mc09_event-%{ProcId}.sh
+	    ;;
+
+     4.4.9) echo "Check Condor jobs on events psip(2S) MC09 for lplm..."
+	   ./python/chk_condorjobs.py run/jpsi2lplm/event_mc09  106
+	   ;;
+
+     4.4.10) echo  "Merge event root file on psip(2S) MC09 for lplm..."
+	   mkdir run/jpsi2lplm/hist_mc09
+       rm run/jpsi2lplm/hist_mc09/jpsi2lplm_psip_mc09_event_merged_1.root
+	   ./python/mrg_rootfiles.py  run/jpsi2lplm/event_mc09 run/jpsi2lplm/hist_mc09
+	   ;; 
+
+
+    4.6.4) echo "Submit Condor jobs on generated MC sample 09&12 for lplm ---- 2..." 
+	    cd run/gen_mc/jpsi2mumu/job_text/jobs
+        find . -name "*.txt.*" | xargs rm	   
+        rm ../rootfile_mumu/gen_mc_mumu_jpsi2lplm-*
+	    boss.condor -g physics -n 3 jobOptions_jpsi2lplm_gen_mc_mumu-%{ProcId}.txt
+        cd ../../../jpsi2mumu_09/job_text/jobs
+        find . -name "*.txt.*" | xargs rm	   
+        rm ../rootfile_mumu_09/gen_mc_mumu_09_jpsi2lplm-*
+	    boss.condor -g physics -n 10 jobOptions_jpsi2lplm_gen_mc_mumu_09-%{ProcId}.txt
+	   ;;
+
+    4.6.8) echo "Submit selection Condor jobs on generated MC sample 09&12 for lplm ---- 2..." 
+	    cd run/gen_mc/jpsi2mumu/job_text/jobs
+        find . -name "*.sh.*" | xargs rm
+        rm ../event_mumu/lplm/jpsi2lplm_gen_mc_mumu_event-*
+	    hep_sub -g physics -n 3 jobOptions_jpsi2lplm_gen_mc_mumu_event-%{ProcId}.sh
+        cd ../../../jpsi2ee_09/job_text/jobs
+        find . -name "*.sh.*" | xargs rm
+        rm ../event_mumu_09/lplm/jpsi2lplm_gen_mc_mumu_09_event-*
+	    hep_sub -g physics -n 10 jobOptions_jpsi2lplm_gen_mc_mumu_09_event-%{ProcId}.sh
+	   ;;
+
+    4.6.10) echo  "Merge event root file on generated MC sample 09&12 for lplm..."
+       rm run/gen_mc/jpsi2mumu/job_text/hist/jpsi2lplm_gen_mc_mumu_event_merged_1.root
+       rm run/gen_mc/jpsi2mumu_09/job_text/hist/jpsi2lplm_gen_mc_mumu_09_event_merged_1.root
+       ./python/mrg_rootfiles.py  run/gen_mc/jpsi2mumu/job_text/event_mumu/lplm run/gen_mc/jpsi2mumu/job_text/hist 
+       ./python/mrg_rootfiles.py  run/gen_mc/jpsi2mumu_09/job_text/event_mumu_09/lplm run/gen_mc/jpsi2mumu_09/job_text/hist 
+	   ;;
+
 
     5.0.1) echo "Simulation -- Generate Jpsi->anything MC samples"
         cd run/gen_mc/jpsi2any
@@ -1454,75 +1694,6 @@ case $option in
 	    ./python/get_samples.py  /besfs/groups/nphy/users/xiaosy/bes/jpsi2invi/v0.1/run/gen_mc/jpsi2any/job_text/dst run/samples/mc12_any/mc12_any_psip.txt 5G
 	    # made 15 groups 
 	    ;;
-
-    # 5.0.4) echo "Generate Condor jobs on generated Jpsi->anything MC sample ---- 1..." 
-	#    cd run/gen_mc/jpsi2any
-	#    ./make_jobOption_file_data09_jpsi2invi.sh
-	#    cd ../job_text/data09
-	#    mv jobOptions_jpsi2invi_data_psip_data09-314.txt jobOptions_jpsi2invi_data_psip_data09-0.txt
-	#    ;;
-
-    # 3.1.3) echo "Test for generated Jpsi->anything MC sample" 
-    #     echo "have you changed test number?(yes / no)
-    #     ./run/jpsi2invi/job_text/data09/jobOptions_jpsi2invi_data_psip_data09-0.txt"
-    #     read opt
-    #     if [ $opt == "yes" ]
-    #         then
-    #         echo "now in yes"  
-    #         cd run/jpsi2invi/job_text/data09
-    #         boss.exe jobOptions_jpsi2invi_data_psip_data09-0.txt
-    #     else
-    #         echo "Default value is 'no', please change test number."
-    #     fi
-    #     ;;
-
-    # 3.1.4) echo "Submit Condor jobs on generated Jpsi->anything MC sample ---- 2..." 
-	#     cd run/jpsi2invi/job_text/data09
-    #     find . -name "*.out.*" | xargs rm
-    #     find . -name "*.err.*" | xargs rm	   
-	# 	rm ../../rootfile_data09/jpsi2invi_data_psip_data09-*
-	# 	boss.condor -g physics -n 314 jobOptions_jpsi2invi_data_psip_data09-%{ProcId}.txt
-	#     ;;
-
-    # 3.1.5) echo "Check Condor jobs on generated Jpsi->anything MC sample..."
-	#    ./python/chk_condorjobs.py run/jpsi2invi/rootfile_data09  314
-	#    ;;
-    
-    # 3.1.6) echo "Generate selection Condor jobs on generated Jpsi->anything MC sample ---- 1..."
-	#    cd run/jpsi2invi/job_text/data09_event
-    #    find . -name "*.sh*" | xargs rm
-    #    cd ../../gen_script
-	#    ./make_jobOption_file_data09_event.sh
-	#    cd ../job_text/data09_event
-	#    mv jobOptions_jpsi2invi_data_psip_data09_event-314.sh jobOptions_jpsi2invi_data_psip_data09_event-0.sh
-    #    chmod 755 jobOptions_jpsi2invi_data_psip_data09_event-*
-	#    ;;
-
-    # 3.1.7) echo "Test for generated Jpsi->anything MC sample event" 
-	# 	cd run/jpsi2invi/job_text/data09_event
-	# 	./jobOptions_jpsi2invi_data_psip_data09_event-0.sh
-    #     ;;
-
-    # 3.1.8) echo "Submit selection Condor jobs on generated Jpsi->anything MC sample ---- 2..." 
-	#     cd run/jpsi2invi/job_text/data09_event
-    #     find . -name "*.out.*" | xargs rm
-    #     find . -name "*.err.*" | xargs rm	  
-	#     rm ../../event_data09/jpsi2invi_data_psip_data09_event-*	
-	#     hep_sub -g physics -n 314 jobOptions_jpsi2invi_data_psip_data09_event-%{ProcId}.sh
-	#    ;;
-
-    # 3.1.9) echo "Check Condor jobs on events generated Jpsi->anything MC sample..."
-	#    ./python/chk_condorjobs.py run/jpsi2invi/event_data09  314
-	#    ;;
-
-    # 3.1.10) echo  "Merge event root file on generated Jpsi->anything MC sample..."
-	#    rm run/jpsi2invi/hist_data09/jpsi2invi_data_psip_data09_event_merged_1.root
-	#    ./python/mrg_rootfiles.py  run/jpsi2invi/event_data09 run/jpsi2invi/hist_data09
-	#    ;; 
-        
-
-
-
 
 
 

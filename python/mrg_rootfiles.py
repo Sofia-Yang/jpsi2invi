@@ -9,6 +9,7 @@ __created__ = "[2016-06-20 Mon 09:46]"
 
 import sys
 import os
+import ROOT
 from tools import check_and_join, group_files_by_size, proc_cmd
 from hurry.filesize import size 
 
@@ -42,7 +43,7 @@ def main():
     merge_root_files(src, dst)
     
 
-def merge_root_files(srcdir, dstdir, size_max='2G', nfile_max=500):
+def merge_root_files(srcdir, dstdir, size_max='2G', nfile_max=700):
     file_list = []
     size_list = []
     for root, dirs, files in os.walk(srcdir):

@@ -32,18 +32,28 @@ mbc.SetBottomMargin(0.15)
 logdir = sys.argv[1:]
 print logdir
 
-if logdir in [['data_pim_costhe'], ['any_pim_costhe'], ['nunu_pim_costhe_703'], ['nunu_pim_costhe'], ['ee_pim_costhe'], ['mumu_pim_costhe_703'], ['mumu_pim_costhe'], ['nn_pim_costhe'], ['pp_pim_costhe']]:
+if logdir in [['mc_pim_costhe'], ['data_pim_costhe'], ['any_pim_costhe'], ['nunu_pim_costhe_703'], ['nunu_pim_costhe'], ['ee_pim_costhe'], ['mumu_pim_costhe_703'], ['mumu_pim_costhe'], ['nn_pim_costhe'], ['pp_pim_costhe']]:
     histo = 'h_pim_costhe'
-elif logdir in [['data_pip_costhe'], ['any_pip_costhe'], ['nunu_pip_costhe_703'], ['nunu_pip_costhe'], ['ee_pip_costhe'], ['mumu_pip_costhe_703'], ['mumu_pip_costhe'], ['nn_pip_costhe'], ['pp_pip_costhe']]:
+elif logdir in [['mc_pip_costhe'], ['data_pip_costhe'], ['any_pip_costhe'], ['nunu_pip_costhe_703'], ['nunu_pip_costhe'], ['ee_pip_costhe'], ['mumu_pip_costhe_703'], ['mumu_pip_costhe'], ['nn_pip_costhe'], ['pp_pip_costhe']]:
     histo = 'h_pip_costhe'
 elif logdir in [['any_pre']]:
     histo = 'hcutflw'
-elif logdir in [['data_pid']]:
-    histo = 'hcutflw'
+elif logdir in [['data_pid_pip']]:
+    histo = 'h_pid_pip'
+elif logdir in [['data_pid_pim']]:
+    histo = 'h_pid_pim'
+elif logdir in [['data_pid_pip_no']]:
+    histo = 'h_pid_pip_no'
+elif logdir in [['data_pid_pim_no']]:
+    histo = 'h_pid_pim_no'
 elif logdir in [['nunu_pip_p'], ['data_pip_p'], ['any_pip_p']]:
     histo = 'h_pip_p'    
 elif logdir in [['nunu_pim_p'], ['data_pim_p'], ['any_pim_p']]:
     histo = 'h_pim_p'    
+elif logdir in [['12_mc_pim_phi'], ['12_data_pim_phi'], ['09_mc_pim_phi'], ['09_data_pim_phi']]:
+    histo = 'h_pim_phi'    
+elif logdir in [['12_mc_pip_phi'], ['12_data_pip_phi'], ['09_mc_pip_phi'], ['09_data_pip_phi']]:
+    histo = 'h_pip_phi'    
 # elif logdir in [['ee_mc_costhe_pip'], ['mumu_mc_costhe_pip'], ['nn_mc_costhe_pip'], ['pp_mc_costhe_pip']]:
 #     histo = 'h_mc_costhe_pip'
 # elif logdir in [['ee_mc_costhe_pim'], ['mumu_mc_costhe_pim'], ['nn_mc_costhe_pim'], ['pp_mc_costhe_pim']]:
@@ -57,12 +67,32 @@ if 'any_pre' in logdir:
     f0 = TFile("run/gen_mc/jpsi2any_09/job_text/hist/jpsi2incl_gen_mc_any_09_event_merged_evtflw.root")
     f1 = TFile("run/gen_mc/jpsi2any/job_text/hist/jpsi2incl_gen_mc_any_event_merged_evtflw.root")
 
-if logdir in [['any_sel'], ['any_pip_p'], ['any_pim_p'], ['any_pip_costhe'], ['any_pim_costhe']]:
+elif logdir in [['12_mc_pim_phi'], ['12_mc_pip_phi']]:
+    mbc.SetLogy() 
+    f0 = TFile('run/jpsi2incl/hist/jpsi2incl_data_psip_data12_event_merged_phi.root')
+    f1 = TFile('run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_phi.root')
+
+elif logdir in [['09_mc_pim_phi'], ['09_mc_pip_phi']]:
+    mbc.SetLogy() 
+    f1 = TFile('run/jpsi2invi/hist_data09/jpsi2invi_data_psip_data09_event_merged_phi.root')
+    f0 = TFile('run/jpsi2incl/hist_data09/jpsi2incl_data_psip_data09_event_merged_phi.root')
+
+elif logdir in [['12_data_pim_phi'], ['12_data_pip_phi']]:
+    mbc.SetLogy() 
+    f1 = TFile('run/jpsi2invi/hist_mc12/jpsi2invi_psip_mc12_event_merged_phi.root')
+    f0 = TFile('run/jpsi2incl/hist_mc12/jpsi2incl_psip_mc12_event_merged_phi.root')
+
+elif logdir in [['09_data_pim_phi'], ['09_data_pip_phi']]:
+    mbc.SetLogy() 
+    f1 = TFile('run/jpsi2invi/hist_mc09/jpsi2invi_psip_mc09_event_merged_phi.root')
+    f0 = TFile('run/jpsi2incl/hist_mc09/jpsi2incl_psip_mc09_event_merged_phi.root')
+
+elif logdir in [['any_sel'], ['any_pip_p'], ['any_pim_p'], ['any_pip_costhe'], ['any_pim_costhe']]:
     # mbc.SetLogy()
     f0 = TFile("run/gen_mc/jpsi2any_09/job_text/hist/jpsi2incl_gen_mc_any_09_event_merged_fit.root")
     f1 = TFile("run/gen_mc/jpsi2any/job_text/hist/jpsi2incl_gen_mc_any_event_merged_fit.root")
 
-if 'pp_01' in logdir:
+elif 'pp_01' in logdir:
     f0 = TFile("run/gen_mc/jpsi2pp_09/job_text/hist/jpsi2invi_gen_mc_pp_09_event_merged_01.root")
     f1 = TFile("run/gen_mc/jpsi2pp/job_text/hist/jpsi2invi_gen_mc_pp_event_merged_01.root")
 
@@ -233,16 +263,23 @@ elif 'data_pre' in logdir:
 
 elif logdir in [['data_sel']]:
     mbc.SetLogy()
-    f0 = TFile("run/jpsi2invi/hist_data09/jpsi2invi_data_psip_data09_event_merged_ncharged.root")
-    f1 = TFile("run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_ncharged.root")
+    f0 = TFile("run/jpsi2invi/hist_data09/jpsi2invi_data_psip_data09_event_merged_pid.root")
+    f1 = TFile("run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_pid.root")
+    # f0 = TFile("run/jpsi2invi/hist_data09/jpsi2invi_data_psip_data09_event_merged_ncharged.root")
+    # f1 = TFile("run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_ncharged.root")
 
-elif logdir in [['data_pid']]:
+elif logdir in [['data_pid_pip'], ['data_pid_pim'], ['data_pid_pip_no'], ['data_pid_pim_no']]:
     f0 = TFile("run/jpsi2invi/hist_data09/jpsi2invi_data_psip_data09_event_merged_ncharged.root")
     f1 = TFile("run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_ncharged.root")
 
 elif logdir in [['data_pim_costhe'], ['data_pip_costhe'], ['data_pim_p'], ['data_pip_p'], ]:
     f0 = TFile("run/jpsi2invi/hist_data09/jpsi2invi_data_psip_data09_event_merged_ncharged.root")
     f1 = TFile("run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_ncharged.root")
+
+elif logdir in [['mc_pim_costhe'], ['mc_pip_costhe']]:
+    f0 = TFile("run/jpsi2invi/hist_mc09/jpsi2invi_psip_mc09_event_merged_ncharged.root")
+    f1 = TFile("run/jpsi2invi/hist_mc12/jpsi2invi_psip_mc12_event_merged_ncharged.root")
+
 
 elif 'mc_pre' in logdir:
     mbc.SetLogy() 
@@ -282,14 +319,17 @@ elif '12_sel' in logdir:
 h0_E = f0.Get(histo)
 h1_E = f1.Get(histo)
 
-if logdir in [['any_pre']]:
+if logdir in [['any_pre'], ['12_mc_pim_phi'], ['12_data_pim_phi'], ['09_mc_pim_phi'], ['09_data_pim_phi'], ['12_mc_pip_phi'], ['12_data_pip_phi'], ['09_mc_pip_phi'], ['09_data_pip_phi']]:
     # h0_E.GetYaxis().SetRangeUser(2200000, 30000000)
     h0_E.GetYaxis().SetRangeUser(0, 35000000)
+    # h0_E.GetYaxis().SetRange(0, 35000000)
+    # h0_E.SetAxisRange(0., 35000000.,"Y")
+    # h0_E.GetYaxis().SetLimits(-10., 35000000.)
 
-if logdir in [['data_pid'], ['data_sel'], ['data_pre'], ['data_pip_costhe'], ['data_pim_costhe'], ['data_pip_p'], ['data_pim_p']]:
+if logdir in [['data_pid_pip_no'], ['data_pid_pim_no'], ['data_pid_pip'], ['data_pid_pim'], ['data_sel'], ['data_pre'], ['data_pip_costhe'], ['data_pim_costhe'], ['data_pip_p'], ['data_pim_p']]:
     h0_E.Scale(341.1/107.0) # 09 and 12 data
 
-elif logdir in [['mc_sel'], ['mc_pre']]:
+elif logdir in [['mc_pip_costhe'], ['mc_pim_costhe'], ['mc_sel'], ['mc_pre']]:
     h0_E.Scale(400.0/107.0) # 09 and 12 mc
 
 elif logdir in [['12_sel'], ['12_pre']]:
@@ -309,7 +349,7 @@ h1_E.Draw("same")
 h0_E.GetYaxis().SetName("")
 h0_E.GetYaxis().SetTitleOffset(1.5)
 
-if logdir in [['data_pip_costhe'], ['data_pim_costhe'], ['any_pip_costhe'], ['any_pim_costhe'], ['nunu_pim_costhe_703'], ['nunu_pip_costhe_703'], ['nunu_pim_costhe'], ['nunu_pip_costhe'], ['ee_mc_costhe_pim'], ['mumu_mc_costhe_pim'], ['nn_mc_costhe_pim'], ['pp_mc_costhe_pim'], ['ee_mc_costhe_pip'], ['mumu_mc_costhe_pip'], ['nn_mc_costhe_pip'], ['pp_mc_costhe_pip'], ['ee_pip_costhe'], ['mumu_pip_costhe'], ['mumu_pip_costhe_703'], ['mumu_pim_costhe_703'], ['nn_pip_costhe'], ['pp_pip_costhe'], ['ee_pim_costhe'], ['mumu_pim_costhe'], ['nn_pim_costhe'], ['pp_pim_costhe']]:
+if logdir in [['mc_pip_costhe'], ['mc_pim_costhe'], ['data_pip_costhe'], ['data_pim_costhe'], ['any_pip_costhe'], ['any_pim_costhe'], ['nunu_pim_costhe_703'], ['nunu_pip_costhe_703'], ['nunu_pim_costhe'], ['nunu_pip_costhe'], ['ee_mc_costhe_pim'], ['mumu_mc_costhe_pim'], ['nn_mc_costhe_pim'], ['pp_mc_costhe_pim'], ['ee_mc_costhe_pip'], ['mumu_mc_costhe_pip'], ['nn_mc_costhe_pip'], ['pp_mc_costhe_pip'], ['ee_pip_costhe'], ['mumu_pip_costhe'], ['mumu_pip_costhe_703'], ['mumu_pim_costhe_703'], ['nn_pip_costhe'], ['pp_pip_costhe'], ['ee_pim_costhe'], ['mumu_pim_costhe'], ['nn_pim_costhe'], ['pp_pim_costhe']]:
     legend = TLegend(0.28, 0.29, 0.68, 0.38)
 
 elif logdir in [['nunu_pip_p'], ['nunu_pim_p'], ['data_pip_p'], ['data_pim_p'], ['any_pip_p'], ['any_pim_p']]:
@@ -338,11 +378,11 @@ elif logdir in [['nunu_pip_p'], ['nunu_pim_p'], ['nunu_pim_costhe_703'], ['nunu_
     legend.AddEntry(h0_E,'2009 Jpsi->nunu MC') 
     legend.AddEntry(h1_E,'2012 Jpsi->nunu MC')
 
-elif logdir in [['data_pid'], ['data_pip_costhe'], ['data_pim_costhe'], ['data_pip_p'], ['data_pim_p'], ['data_pre'], ['data_sel']]:
+elif logdir in [['data_pid_pim_no'], ['data_pid_pip_no'], ['data_pid_pim'], ['data_pid_pip'], ['data_pip_costhe'], ['data_pim_costhe'], ['data_pip_p'], ['data_pim_p'], ['data_pre'], ['data_sel']]:
     legend.AddEntry(h0_E,'2009 data set')
     legend.AddEntry(h1_E,'2012 data set')
 
-elif logdir in [['any_pip_p'], ['any_pim_p'], ['any_pip_costhe'], ['any_pim_costhe'], ['mc_pre'], ['mc_sel'], ['any_pre'], ['any_sel']]:
+elif logdir in [['mc_pip_costhe'], ['mc_pim_costhe'], ['any_pip_p'], ['any_pim_p'], ['any_pip_costhe'], ['any_pim_costhe'], ['mc_pre'], ['mc_sel'], ['any_pre'], ['any_sel']]:
     legend.AddEntry(h0_E,'2009 Jpsi->incl MC')
     legend.AddEntry(h1_E,'2012 Jpsi->incl MC')
 
@@ -354,6 +394,21 @@ elif logdir in [['12_pre'], ['12_sel']]:
     legend.AddEntry(h0_E,'2012 Jpsi->incl MC')
     legend.AddEntry(h1_E,'2012 data set')
 
+elif logdir in [['12_mc_pim_phi'], ['12_mc_pip_phi']]:
+    legend.AddEntry(h1_E,'2012 MC Jpsi->invi decay')
+    legend.AddEntry(h0_E,'2012 MC Jpsi->incl decay')
+
+elif logdir in [['12_data_pim_phi'], ['12_data_pip_phi']]:
+    legend.AddEntry(h1_E,'2012 data Jpsi->invi decay')
+    legend.AddEntry(h0_E,'2012 data Jpsi->incl decay')
+
+elif logdir in [['09_mc_pim_phi'], ['09_mc_pip_phi']]:
+    legend.AddEntry(h1_E,'2009 MC Jpsi->invi decay')
+    legend.AddEntry(h0_E,'2009 MC Jpsi->incl decay')
+
+elif logdir in [['09_mc_pim_phi'], ['09_mc_pip_phi']]:
+    legend.AddEntry(h1_E,'2009 data Jpsi->invi decay')
+    legend.AddEntry(h0_E,'2009 data Jpsi->incl decay')
 
 # legend.SetNColums(1)
 legend.SetBorderSize(0)
@@ -362,7 +417,7 @@ legend.Draw()
 h0_E.GetXaxis().SetTitle('%s' %'_'.join(logdir))
 
 figfile = 'python/plots/%s.pdf' %'_'.join(logdir)
-
+print 'save'
 mbc.SaveAs(figfile)
 
 

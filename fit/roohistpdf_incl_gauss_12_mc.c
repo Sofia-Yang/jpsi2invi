@@ -44,7 +44,8 @@ void roohistpdf_incl_gauss_12_mc()
   
    // 2012 data set
    signal_pdf_rootfile =   "../run/jpsi2lplm/hist/jpsi2lplm_data_psip_data12_event_merged_fit.root" ;
-   jpsi2incl_rootfile =    "../run/gen_mc/jpsi2any/job_text/hist/jpsi2incl_gen_mc_any_event_merged_fit.root" ;
+ //   jpsi2incl_rootfile =    "../run/gen_mc/jpsi2any/job_text/hist/jpsi2incl_gen_mc_any_event_merged_fit.root" ;
+   jpsi2incl_rootfile =    "../run/jpsi2incl/hist_mc12/jpsi2incl_psip_mc12_event_merged_phi.root" ;
    jpsi2invi_rootfile =    "../run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_fit.root" ;
   
    // 2. Select Fiiting Set
@@ -111,7 +112,7 @@ void roohistpdf_incl_gauss_12_mc()
     }
 
     // 2nd order polynomial function 
-    RooRealVar c0("c0","coefficient #0", -0.19, -0.3, 0.01); 
+    RooRealVar c0("c0","coefficient #0", -0.19, -0.3, 0.0); 
     RooRealVar c1("c1","coefficient #1", -0.01, -0.3, 0.1); 
     RooChebychev bkg("bkg","background p.d.f.", x, RooArgList(c0,c1)); 
     
@@ -120,8 +121,8 @@ void roohistpdf_incl_gauss_12_mc()
   //   RooChebychev bkg("bkg","background p.d.f.",x,RooArgList(c0,c1,c2)) ; 
     
     if(hist_id==1){  // For Jpsi2Incl
-      RooRealVar nsig("nsig","signal fraction",    1527540, 700000.0,     3000000.0); 
-      RooRealVar nbkg("nbkg","background fraction",1664220, 600000.0,    2600000.0); 
+      RooRealVar nsig("nsig","signal fraction",    71780100, 7000000.0,     100000000.0); 
+      RooRealVar nbkg("nbkg","background fraction",136768600, 60000000.0,    200000000.0); 
     }
     
     if(hist_id==2){ // For Jpsi2Invi
@@ -164,9 +165,9 @@ void roohistpdf_incl_gauss_12_mc()
        //data_tree.plotOn(xframe, Binning(120)); 
        model.plotOn(xframe); 
        model.plotOn(xframe, Components(bkg), LineStyle(kDashed), LineColor(kGreen)); 
-       model.plotOn(xframe, Components(signalpdf), LineStyle(kDotted)); 
-       signalpdf.plotOn(xframe, Components(sig), LineStyle(kDotted), LineColor(kRed)); 
-       signalpdf.plotOn(xframe, Components(sig1), LineStyle(kDotted), LineColor(kOrange+2));	     
+      // model.plotOn(xframe, Components(signalpdf), LineStyle(kDotted)); 
+      //  signalpdf.plotOn(xframe, Components(sig), LineStyle(kDotted), LineColor(kRed)); 
+      //  signalpdf.plotOn(xframe, Components(sig1), LineStyle(kDotted), LineColor(kOrange+2));	     
        xframe->Draw("e"); 
        gPad->SetLogy();
        xframe->GetXaxis()->CenterTitle();

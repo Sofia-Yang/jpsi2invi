@@ -343,23 +343,26 @@ Mumu::Mumu(const std::string& name, ISvcLocator* pSvcLocator) :
   declareProperty("CosthetaEndcapMax", m_costheta_endcap_max=0.92);
   declareProperty("EnergyBarrelMin", m_energy_barrel_min=0.025); 
   declareProperty("EnergyEndcapMin", m_energy_endcap_min=0.050); 
-  declareProperty("PhotonIsoAngleMin", m_photon_iso_angle_min=10);
-  declareProperty("PionPolarAngleMax", m_pion_polar_angle_max=0.8);
+  declareProperty("PhotonIsoAngleMin", m_photon_iso_angle_min=20);
+  // declareProperty("PionPolarAngleMax", m_pion_polar_angle_max=0.8);
+  declareProperty("PionPolarAngleMax", m_pion_polar_angle_max=0.99);
   declareProperty("PionMomentumMax", m_pion_momentum_max=0.45); 
   declareProperty("MuonMomentumMin", m_muon_momentum_min=0.45); 
   declareProperty("MuonMomentumMax", m_muon_momentum_max=2.0); 
   declareProperty("ProbPionMin", m_prob_pion_min=0.001);
   declareProperty("DipionMassMin", m_dipion_mass_min=3.0); 
   declareProperty("DipionMassMax", m_dipion_mass_max=3.2); 
-  declareProperty("PiPiCosthetaMax", m_pipi_costheta_max=0.95);
-  declareProperty("PiPiSysCosthetaMax", m_pipisys_costheta_max=0.90);
+  // declareProperty("PiPiCosthetaMax", m_pipi_costheta_max=0.95);
+  // declareProperty("PiPiSysCosthetaMax", m_pipisys_costheta_max=0.90);
+  declareProperty("PiPiCosthetaMax", m_pipi_costheta_max=0.99);
+  declareProperty("PiPiSysCosthetaMax", m_pipisys_costheta_max=0.99);
   declareProperty("DipionMassMin", m_mumu_mass_min=3.0); 
   declareProperty("DipionMassMax", m_mumu_mass_max=3.2); 
   declareProperty("epratio", m_ep_ratio=0.26);
   declareProperty("savetopo", m_savetopo = 1);
   declareProperty("data09",m_09data = 0); 
   }
-
+ 
 
 StatusCode Mumu::initialize(){
   MsgStream log(msgSvc(), name());

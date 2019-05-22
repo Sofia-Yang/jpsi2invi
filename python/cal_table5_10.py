@@ -14,35 +14,105 @@ logdir = sys.argv[1:]
 print logdir
 
 if logdir in [['12']]:
-    n_anything = 57901400.0
-    n_anything_err = 8900.0
-    n_invisible = 359628.0
-    n_other_origin = 13779.0
+    # n_anything = 57901400.0
+    # n_anything_err = 8900.0
+    # n_invisible = 359628.0
+    # n_invisible_err = 683.748
+    # # n_invisible = 364738.0
+    # n_other_origin = 14321.0 * 341.1 / 400.0
+    # # n_other_origin = 14490.0 * 341.1 / 400.0
+
     n_pk_mumu = 90016.0
     n_pk_ee = 90822.0
     n_pk_nn = 61219.0
     n_pk_pp = 23491.0
     n_pk_any = 1527550.0
+
+    # notof
+    # n_anything = 59252200.0
+    # n_anything_err = 8983.0
+    # n_invisible = 365314.0
+    # n_invisible_err = 683.748
+    # n_other_origin = 14490.0 * 341.1 / 400.0
+    # n_pk_mumu = 90741.0
+    # n_pk_ee = 91554.0
+    # n_pk_nn = 61787.0
+    # n_pk_pp = 23676.0
+    # n_pk_any = 1527550.0
+
+    # # run 1
+    # n_anything = 3709380.0
+    # n_anything_err = 2247.0
+    # n_invisible = 22084.0
+    # n_invisible_err = 161.0
+    # # run 2
+    # n_anything = 12777900.0
+    # n_anything_err = 4171.0
+    # n_invisible = 75399.0
+    # n_invisible_err = 299.0
+    # # run 3
+    # n_anything = 21099400.0
+    # n_anything_err = 5363.0
+    # n_invisible = 140984.0
+    # n_invisible_err = 406.0
+    # # run 4
+    # n_anything = 13850400.0
+    # n_anything_err = 4342.0
+    # n_invisible = 82306.0
+    # n_invisible_err = 310.0
+    # run 5
+    n_anything = 6558110.0
+    n_anything_err = 2989.0
+    n_invisible = 39455.0
+    n_invisible_err = 216.0
+
+    n_other_origin = 14490.0 * 341.1 / 400.0 * n_anything / 57901400.0
+   
     eff_trigger = 99.8
     eff_trigger_err = 0.04
+
+    # ee scale
     # scale_factor = 0.966586
+    
+	# 09 scale 
     # scale_factor = 0.96225
+    
     scale_factor = 1.0
+    # scale_factor = 0.78
+    # scale_factor = 0.82
 
 elif logdir in [['09']]:
     n_anything = 18658100.0
     n_anything_err = 5000
     n_invisible = 124589.0
-    n_other_origin = 3877.0
+    # n_invisible = 126796.0
+    n_other_origin = 3498.0
+    # n_other_origin = 3547.0
     n_pk_mumu = 87528.0
     n_pk_ee = 87257.0
     n_pk_nn = 62263.0
     n_pk_pp = 23328.0
     n_pk_any = 1584450.0
+
+    # notof
+    # n_anything = 19048200.0
+    # n_anything_err = 5097
+    # n_invisible = 127027.0
+    # n_invisible_err = 683.748
+    # n_other_origin = 3547.0
+    # n_pk_mumu = 88279.0
+    # n_pk_ee = 88105.0
+    # n_pk_nn = 62932.0
+    # n_pk_pp = 23588.0
+    # n_pk_any = 1584450.0
+    
     eff_trigger = 99.4
     eff_trigger_err = 0.1
-    scale_factor = 0.957291
-    # scale_factor = 1.0
+
+    # ee scale
+    # scale_factor = 0.957291
+    
+    scale_factor = 1.0
 
 else:
     print 'input error'
@@ -73,7 +143,6 @@ n_anything_09 = 18658100.0
 # n_invisible = 359628.0
 # n_invisible = 124589.0
 # n_invisible = 368711.0
-n_invisible_err = 683.748
 n_invisible_09 = 137770.0
 
 # n_other = 13779.0 * vi

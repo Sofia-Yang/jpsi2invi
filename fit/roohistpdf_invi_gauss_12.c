@@ -37,16 +37,18 @@ void roohistpdf_invi_gauss_12()
 //	TCanvas* c = new TCanvas("","",900,300);
 //	c->Divide(3);
 
-    // 2009 data set
-  //  signal_pdf_rootfile =   "run/jpsi2lplm/hist_data09/jpsi2lplm_data_psip_data09_event_merged_fit.root" ;
-  //  jpsi2incl_rootfile =    "../run/jpsi2incl/hist_data09/jpsi2incl_data_psip_data09_event_merged_fit.root" ;
-  //  jpsi2invi_rootfile =    "../run/jpsi2invi/hist_data09/jpsi2invi_data_psip_data09_event_merged_fit.root" ;
   
    // 2012 data set
+//   signal_pdf_rootfile =   "../run/jpsi2lplm/hist/jpsi2lplm_data_psip_data12_event_merged_notof.root" ;
+//   jpsi2incl_rootfile =    "../run/jpsi2incl/hist/jpsi2incl_data_psip_data12_event_merged_notof.root" ;
+//   jpsi2invi_rootfile =    "../run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_notof.root" ;
+
+  //  jpsi2invi_rootfile =    "../run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_fit.root" ;
+
    signal_pdf_rootfile =   "../run/jpsi2lplm/hist/jpsi2lplm_data_psip_data12_event_merged_fit.root" ;
    jpsi2incl_rootfile =    "../run/jpsi2incl/hist/jpsi2incl_data_psip_data12_event_merged_fit.root" ;
-  //  jpsi2invi_rootfile =    "../run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_fit.root" ;
-   jpsi2invi_rootfile =    "../run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_ncharged.root" ;
+   // jpsi2invi_rootfile =    "../run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_ncharged.root" ;
+   jpsi2invi_rootfile =    "../run/jpsi2invi/hist/jpsi2invi_data_psip_data12_event_merged_phi.root" ;
   
    // 2. Select Fiiting Set
    int hist_id;  // hist_id = 1 (J/psi->inclusive), 2 (J/psi->invisible)
@@ -113,8 +115,15 @@ void roohistpdf_invi_gauss_12()
     }
 
     // 2nd order polynomial function 
-    RooRealVar c0("c0","coefficient #0", 0.26, -0.1, 0.4); 
-    RooRealVar c1("c1","coefficient #1", 0.06, -0.1, 0.2); 
+//     RooRealVar c0("c0","coefficient #0", 0.26, -0.1, 0.4); 
+//     RooRealVar c1("c1","coefficient #1", 0.06, -0.1, 0.2); 
+    int par_c0 = -5;
+    int par_c1 = 5;
+    RooRealVar c0("c0","coefficient #0", 0.26455+par_c0*0.00414);
+    RooRealVar c1("c1","coefficient #1", 0.05803+par_c1*0.00448); 
+
+    // RooChebychev bkg("bkg","background p.d.f.", x, RooArgList(c0)); 
+
     RooChebychev bkg("bkg","background p.d.f.", x, RooArgList(c0,c1)); 
     
     // 3rd order polynomial function
@@ -162,7 +171,7 @@ void roohistpdf_invi_gauss_12()
        //data_tree.plotOn(xframe, Binning(120)); 
        model.plotOn(xframe); 
        model.plotOn(xframe, Components(bkg), LineStyle(kDashed), LineColor(kGreen)); 
-       model.plotOn(xframe, Components(signalpdf), LineStyle(kDotted)); 
+       //model.plotOn(xframe, Components(signalpdf), LineStyle(kDotted)); 
       //  signalpdf.plotOn(xframe, Components(sig), LineStyle(kDotted), LineColor(kRed)); 
       //  signalpdf.plotOn(xframe, Components(sig1), LineStyle(kDotted), LineColor(kOrange+2));	     
        xframe->Draw("e"); 
