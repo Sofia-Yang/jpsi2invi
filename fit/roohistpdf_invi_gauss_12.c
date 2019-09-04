@@ -98,9 +98,9 @@ void roohistpdf_invi_gauss_12()
        RooHistPdf signalpdf1("SignalPDF", "Signal PDF", x, *data1, 4);
 
        RooRealVar mean("mean","mean of gaussian",3.097, 3.08, 3.11) ; 
-       RooRealVar mean1("mean1","mean1 of gaussian",3.097, 3.07, 3.11) ; 
+       RooRealVar mean1("mean1","mean1 of gaussian",3.097, 3.08, 3.11) ; 
        RooRealVar sigma("sigma","width of gaussian",0.00155, 0.001, 0.002) ; 
-       RooRealVar sigma1("sigma1","width1 of gaussian",0.00410, 0.002, 0.005) ; 
+       RooRealVar sigma1("sigma1","width1 of gaussian",0.00410, 0.003, 0.005) ; 
        RooGaussian sig("sig", "signal component 0", x, mean, sigma);
        RooGaussian sig1("sig1", "signal component 1", x, mean1, sigma1);
        RooGaussian gauss("gauss","gaussian PDF",x,mean,sigma) ;  
@@ -132,8 +132,8 @@ void roohistpdf_invi_gauss_12()
     
     
     if(hist_id==2){ // For Jpsi2Invi
-      RooRealVar nsig("nsig","signal fraction",359622, 250000, 400000.0); 
-      RooRealVar nbkg("nbkg","background fraction",178281, 100000, 300000.0); 
+      RooRealVar nsig("nsig","signal fraction",359622, 300001, 400009.0); 
+      RooRealVar nbkg("nbkg","background fraction",178281, 130001, 200009.0); 
     }
       
     RooAddPdf model("model", "model", RooArgList(signalpdf,bkg), RooArgList(nsig, nbkg));
@@ -289,7 +289,7 @@ void roohistpdf_invi_gauss_12()
     ofs << std::endl;       
     ofs.close();
 
-    std::cout<<"chi2/"<<result->floatParsFinal().getSize()<<" ="<<xframe->chiSquare("model_Norm[vtx_mrecpipi]", "h_data2" ,result->floatParsFinal().getSize())<<std::endl;
+    std::cout<<"chi2/"<<result->floatParsFinal().getSize()<<" ="<<xframe->chiSquare("model_Norm[vtx_mrecpipi]", "h_data" ,result->floatParsFinal().getSize())<<std::endl;
 
 	// RooHist* hresid = xframe->residHist();
 	// RooHist* hpull = xframe->pullHist();

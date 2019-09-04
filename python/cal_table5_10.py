@@ -14,13 +14,20 @@ logdir = sys.argv[1:]
 print logdir
 
 if logdir in [['12']]:
-    # n_anything = 57901400.0
+    n_anything = 57901400.0
+    n_anything_err = 8900.0
+    n_invisible = 359628.0
+    n_invisible_err = 683.748
+    # n_invisible = 364738.0
+    n_other_origin = 14321.0 * 341.1 / 400.0
+    # n_other_origin = 14490.0 * 341.1 / 400.0
+    
+    # # run 5 scale
+    # n_anything = 56216153.0
     # n_anything_err = 8900.0
-    # n_invisible = 359628.0
+    # n_invisible = 348969.0
     # n_invisible_err = 683.748
-    # # n_invisible = 364738.0
     # n_other_origin = 14321.0 * 341.1 / 400.0
-    # # n_other_origin = 14490.0 * 341.1 / 400.0
 
     n_pk_mumu = 90016.0
     n_pk_ee = 90822.0
@@ -60,13 +67,13 @@ if logdir in [['12']]:
     # n_anything_err = 4342.0
     # n_invisible = 82306.0
     # n_invisible_err = 310.0
-    # run 5
-    n_anything = 6558110.0
-    n_anything_err = 2989.0
-    n_invisible = 39455.0
-    n_invisible_err = 216.0
+    # # run 5
+    # n_anything = 6558110.0
+    # n_anything_err = 2989.0
+    # n_invisible = 39455.0
+    # n_invisible_err = 216.0
 
-    n_other_origin = 14490.0 * 341.1 / 400.0 * n_anything / 57901400.0
+    # n_other_origin = 14490.0 * 341.1 / 400.0 * n_anything / 57901400.0
    
     eff_trigger = 99.8
     eff_trigger_err = 0.04
@@ -77,14 +84,15 @@ if logdir in [['12']]:
 	# 09 scale 
     # scale_factor = 0.96225
     
-    scale_factor = 1.0
+    # scale_factor = 1.0
     # scale_factor = 0.78
-    # scale_factor = 0.82
+    scale_factor = 0.8356
 
 elif logdir in [['09']]:
     n_anything = 18658100.0
     n_anything_err = 5000
     n_invisible = 124589.0
+    n_invisible_err = 384.0
     # n_invisible = 126796.0
     n_other_origin = 3498.0
     # n_other_origin = 3547.0
@@ -112,7 +120,8 @@ elif logdir in [['09']]:
     # ee scale
     # scale_factor = 0.957291
     
-    scale_factor = 1.0
+    # scale_factor = 1.0
+    scale_factor = 0.968
 
 else:
     print 'input error'

@@ -27,18 +27,17 @@ cms_p4 = ROOT.TLorentzVector(0.011*ECMS, 0, 0, ECMS)
 
 h_evtflw = ROOT.TH1F('hevtflw', 'eventflow', 10, 0, 10) 
 h_evtflw.GetXaxis().SetBinLabel(1, 'raw')
-h_evtflw.GetXaxis().SetBinLabel(2, '0.51<Mgg<0.57')
+h_evtflw.GetXaxis().SetBinLabel(2, 'N_{#gamma}=0')
 h_evtflw.GetXaxis().SetBinLabel(3, '|cos#theta|<0.8')
 h_evtflw.GetXaxis().SetBinLabel(4, '|p|<0.45') 
 h_evtflw.GetXaxis().SetBinLabel(5, 'PID') 
 h_evtflw.GetXaxis().SetBinLabel(6, 'cos#theta_{#pi^{+}#pi^{-}}<0.95') 
 h_evtflw.GetXaxis().SetBinLabel(7, 'cos#theta_{#pi#pi sys}<0.9') 
 h_evtflw.GetXaxis().SetBinLabel(8, '3<M_{#pi#pi}^{rec}<3.2') 
-h_evtflw.GetXaxis().SetBinLabel(9, 'Egam from jpsi > 1.0') 
 
 
-h_mrecpipi_zc = ROOT.TH1D('h_mrecpipi_zc', 'mrecpipi_zc', 100, 3.0, 3.2)
-h_mrecpipi = ROOT.TH1D('h_mrecpipi', 'mrecpipi', 140, 0.0, 3.2)
+h_mrecpipi_zc = ROOT.TH1D('h_mrecpipi_zc', 'mrecpipi_zc', 100, 3.04, 3.16)
+h_mrecpipi = ROOT.TH1D('h_mrecpipi', 'mrecpipi', 140, 3.03, 3.17)
 h_mpipi = ROOT.TH1D('h_mpipi', 'mpipi', 100, 0.0, 4.0)                              # 0.2 - 0.7 
 h_pi_p = ROOT.TH1D('h_pi_p', 'pi_p', 100, 0.0, 1.0)                                 # 0.0 - 0.5
 h_pi_invi_p = ROOT.TH1D('h_pi_invi_p', 'pi_invi_p', 100, 0.0, 1.0)                  # 0.0 - 0.5
@@ -84,16 +83,6 @@ count15 = 0
 count_EMC_Track = 0
 count_all = 0
 fill_trig = 0 
-cut_mgg =0 
-cut_trk_costhe =0 
-cut_trkinvi_costhe =0 
-cut_trk_p =0 
-cut_trkinvi_p =0 
-cut_cospipi =0 
-cut_cos2pisys =0 
-cut_pi_PID =0 
-cut_mjpsi_win =0 
-cut_mpipieta =0
 
 def usage():
     sys.stdout.write('''
@@ -163,8 +152,8 @@ def main():
 
         fill_histograms(t)
         
-        if select_jpsi_to_gammaEta(t):
-            t_out.Fill()
+        # if select_jpsi_to_gammaEta(t):
+        #     t_out.Fill()
 
         if (fill_trig):
 
@@ -296,19 +285,8 @@ def fill_histograms(t):
         cos2pisys = (pi_p4_raw+pi_invi_p4_raw).CosTheta()
         # print cospipi
 
-        global cut_mgg   
-        global cut_trk_costhe   
-        global cut_trkinvi_costhe   
-        global cut_trk_p   
-        global cut_trkinvi_p   
-        global cut_cospipi   
-        global cut_cos2pisys   
-        global cut_pi_PID   
-        global cut_mjpsi_win   
-        global cut_mpipieta  
-
-        # cut_mgg = 1
-        cut_mgg = ( eta_p4_raw.M() > 0.51 and eta_p4_raw.M() < 0.57 )
+        cut_mgg = 1
+        # cut_mgg = ( eta_p4_raw.M() > 0.51 and eta_p4_raw.M() < 0.57 )
         cut_trk_costhe = (abs(pi_p4_raw.CosTheta()) < 0.8)
         cut_trkinvi_costhe = (abs(pi_invi_p4_raw.CosTheta()) < 0.8)
         cut_trk_p =  (abs(pi_p4_raw.P()) < 0.45)
@@ -316,10 +294,10 @@ def fill_histograms(t):
         cut_cospipi =  (cospipi<0.95)
         cut_cos2pisys = (cos2pisys<0.9)
         cut_pi_PID = (prob_pi> t.prob_kp and prob_pi> t.prob_km and prob_pi> 0.001)
-        # cut_mjpsi_win = 1
-        cut_mjpsi_win = (jpsi_p4_raw.M()>3.0 and jpsi_p4_raw.M()<3.2)
-        # cut_mpipieta = 1
-        cut_mpipieta = (gam3_p4_raw.M()>1.0)
+        cut_mjpsi_win = 1
+        # cut_mjpsi_win = (jpsi_p4_raw.M()>3.0 and jpsi_p4_raw.M()<3.2)
+        cut_mpipieta = 1
+        # cut_mpipieta = (gam3_p4_raw.M()>1.0)
 
         if (            cut_trk_costhe and cut_trkinvi_costhe and cut_trk_p and cut_trkinvi_p and 
             cut_cospipi and cut_cos2pisys and cut_pi_PID and cut_mjpsi_win and cut_mpipieta):
@@ -349,16 +327,12 @@ def fill_histograms(t):
         if (cut_mgg and cut_trk_costhe and cut_trkinvi_costhe and cut_trk_p and cut_trkinvi_p and 
             cut_cospipi and                   cut_pi_PID and cut_mjpsi_win and cut_mpipieta):
             h_cos2pisys.Fill(cos2pisys)
-
-        if (cut_mgg and cut_trk_costhe and cut_trkinvi_costhe and cut_trk_p and cut_trkinvi_p and 
-            cut_cospipi and cut_cos2pisys and cut_pi_PID and                   cut_mpipieta):
-            # print jpsi_p4_raw.M()
-            h_mrecpipi.Fill(jpsi_p4_raw.M())
-
-        if (cut_mgg and cut_trk_costhe and cut_trkinvi_costhe and cut_trk_p and cut_trkinvi_p and 
-            cut_cospipi and cut_cos2pisys and cut_pi_PID and cut_mjpsi_win and cut_mpipieta and (t.run>0) ):
             global fill_trig
             fill_trig = 1 
+
+        # if (cut_mgg and cut_trk_costhe and cut_trkinvi_costhe and cut_trk_p and cut_trkinvi_p and 
+        #     cut_cospipi and cut_cos2pisys and cut_pi_PID and cut_mjpsi_win and cut_mpipieta and (t.run>0) ):
+        #     fill_trig = 1 
 
 def write_histograms():
     h_evtflw.Write()
@@ -379,40 +353,38 @@ def write_histograms():
 
 def select_jpsi_to_gammaEta(t):
     h_evtflw.Fill(0) 
-
+    
     # Cut on the number of good photon to make the same condition as Z.C.
-    if not (cut_mgg):
+    if not (t.ngam < 10):
         return False
     h_evtflw.Fill(1) 
     
     # Selection Criteria for soft pions -- the same as invisible etc.
-    if not ( cut_trk_costhe and cut_trkinvi_costhe):
+    if not ( abs(math.cos(t.trkp_theta)) < 0.8 and abs(math.cos(t.trkm_theta)) < 0.8):
         return False
     h_evtflw.Fill(2) 
 
-    if not (cut_trk_p and cut_trkinvi_p):
+    if not (abs(t.trkp_p) < 0.45 and abs(t.trkm_p) < 0.45):
         return False 
     h_evtflw.Fill(3) 
 
-    if not (cut_pi_PID):
+    if not (t.prob_pip > t.prob_kp and t.prob_pip > 0.001 and
+            t.prob_pim > t.prob_km and t.prob_pim > 0.001):
         return False
     h_evtflw.Fill(4)
 
-    if not (cut_cospipi):
+    if not (t.vtx_cospipi < 0.95):
         return False
     h_evtflw.Fill(5)
 
-    if not (cut_cos2pisys):
+    if not (abs(t.vtx_cos2pisys) < 0.9):
         return False
     h_evtflw.Fill(6)
 
-    if not (cut_mjpsi_win):
+    if not (t.vtx_mrecpipi > 3.0 and t.vtx_mrecpipi < 3.2):
         return False
     h_evtflw.Fill(7)
     
-    if not (cut_mpipieta):
-        return False
-    h_evtflw.Fill(8)
 
     return True
     
